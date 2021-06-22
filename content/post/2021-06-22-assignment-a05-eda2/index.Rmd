@@ -172,11 +172,11 @@ worker_effect %>%
 
 #### As you can see in the graph, the longer the insulation time, the longer the flooring time. In the earlier graphs, the impact of increased worker hours was used to evaluate how effective increasing the number of workers on the insulation activity was in decreasing the insulation time and therefore the flooring time. From here, we can see that it is evident that if insulation time is decreased, so is time to complete flooring. This suggests that instead of comparing direct worker hours to flooring time, it may be more effective to apply the number of workers as a weighting to the values, which may provide a more accurate depiction of how increasing workers decreased insulation time and therefore most likely, also the flooring time. 
 
-#### For a final visualization, the graph below shows the changes in flooring times for 40x12 units. These are the units that have been most commonly produced during the data collection process, and therefore have undergone the most process changes. 
+#### For a final visualization, the graph below shows the overall time spent on flooring in production, broken down by unit size. 
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-p2 <- ggplot(flooring, aes(x=c("40x12"), y=Total_Flooring_Time, fill=Type )) + 
+p2 <- ggplot(flooring, aes(x=Size, y=Total_Flooring_Time, fill=Type )) + 
   geom_col(na.rm = TRUE) +
   scale_fill_hue(c = 40) +
   theme() +
