@@ -1,18 +1,19 @@
 ---
-title: Assignment A05 - EDA2
+title: 'Assignment A05: EDA2'
 author: Alyssa van de Riet
-date: '2021-06-22'
+date: '2021-06-17'
 slug: assignment-a05-eda2
 categories:
-  - R
+  - EDA2
   - tidyverse
   - assignment
 tags: []
 ---
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p>Loading libraries</p>
 <div id="dataset" class="section level3">
 <h3>Dataset</h3>
 <div id="the-dataset-used-for-this-assignment-was-taken-from-the-larger-dataset-i-will-be-using-for-my-masters-thesis.-it-includes-information-from-time-studies-of-an-off-site-modulate-construction-flooring-process.-the-process-produces-modular-office-trailers-commonly-referred-to-as-either-units-or-trailers.-the-initial-data-set-is-called-flooring-and-has-been-manipulated-into-subsets-named-flooring_avg-and-worker_effect." class="section level4">
@@ -101,7 +102,7 @@ tags: []
 <h3>Discoveries and Insights</h3>
 <div id="to-determine-the-effect-of-trailer-size-on-the-time-it-takes-to-complete-the-flooring-on-a-unit-the-graph-below-was-created." class="section level4">
 <h4>To determine the effect of trailer size on the time it takes to complete the flooring on a unit, the graph below was created.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/vis-res-1-1.png" width="100%" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/vis-res-1-1.png" width="100%" /></p>
 </div>
 <div id="as-shown-in-the-graph-the-general-trend-of-the-data-is-that-as-trailer-size-increases-so-does-the-time-required-to-complete-the-flooring-on-the-trailer.-this-is-generally-what-is-expected.-by-plotting-this-relationship-you-can-also-see-the-variations-within-the-40x12-trailer-units-which-have-a-square-footage-of-480-sq-ft.-when-these-units-were-being-made-changes-were-being-made-to-the-flooring-process.-the-variations-are-visualized-within-the-effect-of-size-on-flooring-time-graph." class="section level4">
 <h4>As shown in the graph, the general trend of the data is that as trailer size increases, so does the time required to complete the flooring on the trailer. This is generally what is expected. By plotting this relationship you can also see the variations within the 40x12 Trailer units (which have a square footage of 480 sq ft). When these units were being made, changes were being made to the flooring process. The variations are visualized within the “Effect of Size on Flooring Time” graph.</h4>
@@ -111,40 +112,39 @@ tags: []
 </div>
 <div id="i-switched-from-using-geom_bar-to-geom_col-and-was-then-able-to-have-the-y-axis-display-the-average-flooring-times-for-each-unit-size-with-the-differences-due-to-unit-type-displayed-by-the-legend.-it-is-interested-to-see-that-there-is-a-difference-between-the-timing-for-open-units-and-office-units.-although-there-are-additional-complexities-in-office-trailers-the-flooring-process-is-not-effected-by-this.-the-differences-within-this-are-likely-due-to-the-process-improvements-made-while-data-was-being-collected." class="section level4">
 <h4>I switched from using geom_bar() to geom_col() and was then able to have the y-axis display the average flooring times for each unit size, with the differences due to unit type displayed by the legend. It is interested to see that there is a difference between the timing for open units and office units. Although there are additional complexities in office trailers, the flooring process is not effected by this. The differences within this are likely due to the process improvements made while data was being collected.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="one-method-for-improving-the-production-process-that-has-been-implemented-has-been-to-increase-the-amount-of-workers-taking-part-in-the-insulation-process-of-flooring.-there-have-been-questions-from-workers-as-to-how-effective-this-actually-is-as-it-appears-to-increase-the-amount-of-worker-hours-which-may-out-weigh-the-positive-impact-of-decreasing-the-overall-flooring-time." class="section level4">
 <h4>One method for improving the production process that has been implemented has been to increase the amount of workers taking part in the insulation process of flooring. There have been questions from workers as to how effective this actually is, as it appears to increase the amount of worker hours, which may out weigh the positive impact of decreasing the overall flooring time.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="based-on-this-graph-the-general-trend-shows-that-as-the-worker-hours-increase-so-does-the-time-to-complete-the-floor.-this-doesnt-speak-to-how-the-overall-process-has-been-effected-by-the-small-change-to-the-insulation-process." class="section level4">
 <h4>Based on this graph, the general trend shows that as the worker hours increase, so does the time to complete the floor. This doesn’t speak to how the overall process has been effected by the small change to the insulation process.</h4>
 </div>
 <div id="the-subfloor-process-has-also-been-identified-as-one-of-the-longer-subprocesses-of-the-flooring-process.-the-following-graph-was-created-to-show-the-effect-of-worker-hours-on-this-process." class="section level4">
 <h4>The subfloor process has also been identified as one of the longer subprocesses of the flooring process. The following graph was created to show the effect of worker hours on this process.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="as-shown-above-the-more-worker-hours-spent-on-the-subfloor-the-longer-it-takes-to-complete-flooring.-as-with-the-insulation-process-this-does-not-accurately-speak-to-the-effect-of-changing-the-number-of-workers.-there-could-be-one-worker-working-for-three-hours-or-there-could-be-three-workers-working-for-one-hour-and-both-would-have-the-same-number-of-worker-hours.-to-show-this-variation-the-following-graph-shows-that-an-increase-in-worker-hours-doesnt-always-lead-to-an-increase-in-subfloor-time." class="section level4">
 <h4>As shown above, the more worker hours spent on the subfloor, the longer it takes to complete flooring. As with the insulation process, this does not accurately speak to the effect of changing the number of workers. There could be one worker working for three hours, or there could be three workers working for one hour, and both would have the same number of worker hours. To show this variation, the following graph shows that an increase in worker hours doesn’t always lead to an increase in subfloor time.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="this-graph-demonstrates-the-variation-that-is-likely-contributed-to-the-number-of-workers-assigned-to-working-on-the-subfloor." class="section level4">
 <h4>This graph demonstrates the variation that is likely contributed to the number of workers assigned to working on the subfloor.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="when-looking-at-the-effect-of-increased-worker-hours-spent-on-insulation-on-time-to-complete-the-flooring-process-it-still-appears-as-though-increasing-the-worker-hours-is-related-to-an-increase-in-time-to-complete-the-flooring-process.-this-is-interesting-because-within-the-production-process-there-has-been-an-overall-decrease-in-flooring-times.-in-addition-to-adding-more-workers-to-the-insulation-process-the-process-has-shifted-from-sequential-to-in-parallel.-based-on-what-appears-to-be-a-lack-of-correlation-between-increase-workers-on-the-insulation-activity-and-decreasing-the-overall-flooring-time-it-can-be-concluded-that-the-decreases-in-overall-flooring-times-are-more-likely-due-to-the-change-from-sequential-to-parallel." class="section level4">
 <h4>When looking at the effect of increased worker hours spent on insulation on time to complete the flooring process, it still appears as though increasing the worker hours is related to an increase in time to complete the flooring process. This is interesting, because within the production process, there has been an overall decrease in flooring times. In addition to adding more workers to the insulation process, the process has shifted from sequential to in parallel. Based on what appears to be a lack of correlation between increase workers on the insulation activity and decreasing the overall flooring time, it can be concluded that the decreases in overall flooring times are more likely due to the change from sequential to parallel.</h4>
 </div>
 <div id="to-further-illustrate-the-effect-of-the-process-changes-from-sequential-to-parallel-the-insulation-time-has-been-compared-to-the-overall-flooring-time." class="section level4">
 <h4>To further illustrate the effect of the process changes from sequential to parallel, the insulation time has been compared to the overall flooring time.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/post/2021-06-22-assignment-a05-eda2/index2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="as-you-can-see-in-the-graph-the-longer-the-insulation-time-the-longer-the-flooring-time.-in-the-earlier-graphs-the-impact-of-increased-worker-hours-was-used-to-evaluate-how-effective-increasing-the-number-of-workers-on-the-insulation-activity-was-in-decreasing-the-insulation-time-and-therefore-the-flooring-time.-from-here-we-can-see-that-it-is-evident-that-if-insulation-time-is-decreased-so-is-time-to-complete-flooring.-this-suggests-that-instead-of-comparing-direct-worker-hours-to-flooring-time-it-may-be-more-effective-to-apply-the-number-of-workers-as-a-weighting-to-the-values-which-may-provide-a-more-accurate-depiction-of-how-increasing-workers-decreased-insulation-time-and-therefore-most-likely-also-the-flooring-time." class="section level4">
 <h4>As you can see in the graph, the longer the insulation time, the longer the flooring time. In the earlier graphs, the impact of increased worker hours was used to evaluate how effective increasing the number of workers on the insulation activity was in decreasing the insulation time and therefore the flooring time. From here, we can see that it is evident that if insulation time is decreased, so is time to complete flooring. This suggests that instead of comparing direct worker hours to flooring time, it may be more effective to apply the number of workers as a weighting to the values, which may provide a more accurate depiction of how increasing workers decreased insulation time and therefore most likely, also the flooring time.</h4>
 </div>
 <div id="for-a-final-visualization-the-graph-below-shows-the-changes-in-flooring-times-for-40x12-units.-these-are-the-units-that-have-been-most-commonly-produced-during-the-data-collection-process-and-therefore-have-undergone-the-most-process-changes." class="section level4">
 <h4>For a final visualization, the graph below shows the changes in flooring times for 40x12 units. These are the units that have been most commonly produced during the data collection process, and therefore have undergone the most process changes.</h4>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>
 <div id="summary" class="section level3">

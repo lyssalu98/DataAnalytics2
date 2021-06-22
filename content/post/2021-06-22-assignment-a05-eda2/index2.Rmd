@@ -1,14 +1,16 @@
 ---
-title: Assignment A05 - EDA2
+title: 'Assignment A05: EDA2'
 author: Alyssa van de Riet
-date: '2021-06-22'
+date: '2021-06-17'
 slug: assignment-a05-eda2
 categories:
-  - R
+  - EDA2
   - tidyverse
   - assignment
 tags: []
 ---
+
+Loading libraries
 
 ```{r echo=FALSE, message=FALSE}
 library(ggplot2)
@@ -58,7 +60,6 @@ worker_effect <- flooring %>%
 
 
 ```
-
 ```{r}
 flooring
 floor_avg
@@ -67,9 +68,7 @@ worker_effect
 
 
 ### Discoveries and Insights
-
 #### To determine the effect of trailer size on the time it takes to complete the flooring on a unit, the graph below was created.
-
 ```{r vis-res-1, echo=FALSE, out.width="100%", message=FALSE}
 time_size_fit <- linear_reg() %>%
   set_engine("lm") %>%
@@ -112,7 +111,6 @@ p2
 ```
 
 #### One method for improving the production process that has been implemented has been to increase the amount of workers taking part in the insulation process of flooring. There have been questions from workers as to how effective this actually is, as it appears to increase the amount of worker hours, which may out weigh the positive impact of decreasing the overall flooring time. 
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 flooring %>%
   ggplot(aes(x=Total_WH, y=Total_Flooring_Time)) +
@@ -160,7 +158,6 @@ worker_effect %>%
 #### When looking at the effect of increased worker hours spent on insulation on time to complete the flooring process, it still appears as though increasing the worker hours is related to an increase in time to complete the flooring process. This is interesting, because within the production process, there has been an overall decrease in flooring times. In addition to adding more workers to the insulation process, the process has shifted from sequential to in parallel. Based on what appears to be a lack of correlation between increase workers on the insulation activity and decreasing the overall flooring time, it can be concluded that the decreases in overall flooring times are more likely due to the change from sequential to parallel. 
 
 #### To further illustrate the effect of the process changes from sequential to parallel, the insulation time has been compared to the overall flooring time.
-
 ```{r echo=FALSE, message=FALSE}
 worker_effect %>%
   ggplot(aes(x=Insulation, y=Total_Flooring_Time)) +
@@ -185,11 +182,9 @@ p2 <- ggplot(flooring, aes(x=c("40x12"), y=Total_Flooring_Time, fill=Type )) +
     x = "Trailer Size",
     y = "Total Flooring Time (hours)")
 
-p2
-
 ```
 
 
 ### Summary
 
-#### In summary, I was able to successfully answer three out of four questions. As unit size increases, flooring times also increase. Average flooring times were determined based on unit size and type. Unfortunately, the data collected did not provide an accurate representation of the effect increased resources has had in the production process. This may seem like a negative realisation, but in reality it will allow me to collect improved data in the future. Despite this mishap, it was determined that decreasing the insulation process time also decreases the overall flooring process, which was the goal of the changes. As for whether or not this can be done by increasing the number of workers completing the flooring process, future data is required to quantify this.
+#### In summary, I was able to successfully answer three out of four questions. As unit size increases, flooring times also increase. Average flooring times were determined based on unit size and type. Unfortunately, the data collected did not provide an accurate representation of the effect increased resources has had in the production process. This may seem like a negative realisation, but in reality it will allow me to collect improved data in the future. Despite this mishap, it was determined that decreasing the insulation process time also decreases the overall flooring process, which was the goal of the changes. As for whether or not this can be done by increasing the number of workers completing the flooring process, future data is required to quantify this. 
