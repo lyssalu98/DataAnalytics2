@@ -1,0 +1,154 @@
+---
+title: Assignment A05 - EDA2
+author: Alyssa van de Riet
+date: '2021-06-22'
+slug: assignment-a05-eda2
+categories:
+  - R
+  - tidyverse
+  - assignment
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="dataset" class="section level3">
+<h3>Dataset</h3>
+<div id="the-dataset-used-for-this-assignment-was-taken-from-the-larger-dataset-i-will-be-using-for-my-masters-thesis.-it-includes-information-from-time-studies-of-an-off-site-modulate-construction-flooring-process.-the-process-produces-modular-office-trailers-commonly-referred-to-as-either-units-or-trailers.-the-initial-data-set-is-called-flooring-and-has-been-manipulated-into-subsets-named-flooring_avg-and-worker_effect." class="section level4">
+<h4>The dataset used for this assignment was taken from the larger dataset I will be using for my Master’s thesis. It includes information from time studies of an off-site modulate construction flooring process. The process produces modular office trailers, commonly referred to as either “units” or “trailers”. The initial data set is called “flooring”, and has been manipulated into subsets named “flooring_avg” and “worker_effect”.</h4>
+</div>
+<div id="when-analysing-this-data-there-are-many-questions-i-would-like-to-answer-including-the-following" class="section level4">
+<h4>When analysing this data, there are many questions I would like to answer, including the following:</h4>
+<ol style="list-style-type: decimal">
+<li><p>How does the unit size effect overall timing for the flooring operation?</p></li>
+<li><p>What are the average times for each unit size and type?</p></li>
+<li><p>Does applying more resources (such as workers) to an activity improve the overall activity time?</p></li>
+<li><p>Is there a relationship between the time to complete insulation and the time to complete the overall flooring process?</p></li>
+</ol>
+</div>
+</div>
+<div id="manipulating-the-dataset" class="section level3">
+<h3>Manipulating the dataset</h3>
+<div id="in-order-to-make-my-data-easier-to-work-with-i-manipulated-it-to-create-subsets-which-will-help-me-answer-the-specific-questions-i-have-identified.-when-creating-the-floor_averages-subset-i-noticed-that-for-40x12-open-units-the-average-value-was-returned-as-na.-because-i-am-familiar-with-my-data-i-knew-that-there-had-been-many-40x12-units-captured-with-the-data-and-began-troubleshooting-this-error.-i-then-realised-that-i-had-not-removed-missing-values-which-was-causing-this-when-i-attempted-to-use-the-ddply-function.-after-removing-these-values-the-average-time-for-this-unit-could-be-calculated." class="section level4">
+<h4>In order to make my data easier to work with, I manipulated it to create subsets, which will help me answer the specific questions I have identified. When creating the floor_averages subset, I noticed that for 40x12 Open units, the average value was returned as “NA”. Because I am familiar with my data, I knew that there had been many 40x12 units captured with the data and began troubleshooting this error. I then realised that I had not removed missing values, which was causing this, when I attempted to use the ddply function. After removing these values, the average time for this unit could be calculated.</h4>
+<pre class="r"><code>flooring</code></pre>
+<pre><code>## # A tibble: 20 x 37
+##    Unit      Size  Square_Footage Type             Flip WH_flip Flip_to_Assembly
+##    &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;
+##  1 AL21-1777 40x12            480 3 Office       0.0833    0.33             5.82
+##  2 AL21-1778 40x12            480 3 Office       0.1       0.2              5.22
+##  3 AL21-1779 40x12            480 Open           0.0833    0.33             5.88
+##  4 AL21-1768 50x12            600 3 Office (S~   0.167     0.33             5.77
+##  5 AL21-1770 60x12            720 Open           0.167     0.38             8.27
+##  6 AL21-1771 60x12            720 Open           0.0667    0.33             5.17
+##  7 AL21-1772 60x12            720 Open           0.05      0.2              4.3 
+##  8 AL21-1773 60x12            720 Open         144         0.3              4.65
+##  9 AL21-1782 60x12            720 Open           0.167     0.5              3.53
+## 10 AL21-1783 60x12            720 Open           0.25      0.9              3.03
+## 11 AL21-1784 20x11            220 S/C WR 2.5B    0.05      0.3              2.47
+## 12 AL21-1785 20x11            220 S/C WR 2.5B    0.0833    0.42             2.47
+## 13 AL21-1786 20x11            220 S/C WR 2.5B    0.142     0.46             1.92
+## 14 AL21-1787 20x11            220 S/C WR 2.5B    0.142     0.46             1.92
+## 15 AL21-1788 40x12            480 Open           0.15      0.6              2.83
+## 16 AL21-1789 40x12            480 Open           0.217     0.65             2.52
+## 17 AL21-1790 40x12            480 Open           0.167     0.5              2.52
+## 18 AL21-1791 40x12            480 Open           0.133     0.43             3.05
+## 19 AL21-1792 40x12            480 Open          NA        NA               NA   
+## 20 AL21-1781 40x12            480 2 Office      NA        NA               NA   
+## # ... with 30 more variables: WH_all_floor &lt;dbl&gt;, Insulation &lt;dbl&gt;,
+## #   WH_insu &lt;dbl&gt;, Subfloor &lt;dbl&gt;, WH_sub &lt;dbl&gt;, Sanding &lt;dbl&gt;, WH_sand &lt;dbl&gt;,
+## #   Sweeping &lt;dbl&gt;, WH_sweep &lt;dbl&gt;, Dust &lt;time&gt;, WH_dust &lt;dbl&gt;, Proplast &lt;dbl&gt;,
+## #   WH_pro &lt;dbl&gt;, All_Vinyl &lt;dbl&gt;, WH_all_vinyl &lt;dbl&gt;, Vinyl_Layout &lt;dbl&gt;,
+## #   WH_lay &lt;dbl&gt;, Vinyl_Trim &lt;dbl&gt;, WH_trim &lt;dbl&gt;, Glue_1 &lt;dbl&gt;, WH_G1 &lt;dbl&gt;,
+## #   Glue_2 &lt;dbl&gt;, WH_G2 &lt;dbl&gt;, Roll &lt;dbl&gt;, WH_Roll &lt;dbl&gt;, Plastic &lt;dbl&gt;,
+## #   WH_Plastic &lt;dbl&gt;, Total_Flooring_Time &lt;dbl&gt;, Total_Shop_Time &lt;dbl&gt;,
+## #   Total_WH &lt;dbl&gt;</code></pre>
+<pre class="r"><code>floor_avg</code></pre>
+<pre><code>##    Size            Type      mean
+## 1 20x11     S/C WR 2.5B  2.540000
+## 2 40x12        2 Office  7.680000
+## 3 40x12        3 Office  5.375000
+## 4 40x12            Open  3.432000
+## 5 50x12 3 Office (SOLD) 10.170000
+## 6 60x12            Open  5.136667</code></pre>
+<pre class="r"><code>worker_effect</code></pre>
+<pre><code>## # A tibble: 19 x 5
+##    Unit      Size  Total_Flooring_Time Insulation WH_insu
+##    &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 AL21-1777 40x12                5.65       0.75    1   
+##  2 AL21-1778 40x12                5.1        0.38    1.15
+##  3 AL21-1779 40x12                5.27       1.42    0.73
+##  4 AL21-1768 50x12               10.2        0.88    1.05
+##  5 AL21-1770 60x12                7.93       1.58    2.83
+##  6 AL21-1771 60x12                5.23       1.58    3.67
+##  7 AL21-1772 60x12                5.43       0.83    3.28
+##  8 AL21-1773 60x12                5.25       0.48    1.68
+##  9 AL21-1782 60x12                3.7        0.4     0.4 
+## 10 AL21-1783 60x12                3.28       0.33    1.6 
+## 11 AL21-1784 20x11                2.53       0.23    0.9 
+## 12 AL21-1785 20x11                2.53       0.23    0.9 
+## 13 AL21-1786 20x11                2.55       0.15    0.57
+## 14 AL21-1787 20x11                2.55       0.15    0.57
+## 15 AL21-1788 40x12                3.38       0.38    1.2 
+## 16 AL21-1789 40x12                2.73       0.38    1.38
+## 17 AL21-1790 40x12                2.58       0.2     1.12
+## 18 AL21-1791 40x12                3.2        0.4     1.18
+## 19 AL21-1781 40x12                7.68       1.08    1</code></pre>
+</div>
+</div>
+<div id="discoveries-and-insights" class="section level3">
+<h3>Discoveries and Insights</h3>
+<div id="to-determine-the-effect-of-trailer-size-on-the-time-it-takes-to-complete-the-flooring-on-a-unit-the-graph-below-was-created." class="section level4">
+<h4>To determine the effect of trailer size on the time it takes to complete the flooring on a unit, the graph below was created.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/vis-res-1-1.png" width="100%" /></p>
+</div>
+<div id="as-shown-in-the-graph-the-general-trend-of-the-data-is-that-as-trailer-size-increases-so-does-the-time-required-to-complete-the-flooring-on-the-trailer.-this-is-generally-what-is-expected.-by-plotting-this-relationship-you-can-also-see-the-variations-within-the-40x12-trailer-units-which-have-a-square-footage-of-480-sq-ft.-when-these-units-were-being-made-changes-were-being-made-to-the-flooring-process.-the-variations-are-visualized-within-the-effect-of-size-on-flooring-time-graph." class="section level4">
+<h4>As shown in the graph, the general trend of the data is that as trailer size increases, so does the time required to complete the flooring on the trailer. This is generally what is expected. By plotting this relationship you can also see the variations within the 40x12 Trailer units (which have a square footage of 480 sq ft). When these units were being made, changes were being made to the flooring process. The variations are visualized within the “Effect of Size on Flooring Time” graph.</h4>
+</div>
+<div id="the-average-trailer-times-were-determined-previously-in-the-data-manipulation.-using-the-average-times-for-the-trailers-gives-a-more-representative-value-and-graph-than-using-the-times-for-each-trailer.-to-visualize-the-changes-trailer-types-can-have-on-flooring-times-i-want-to-use-a-bar-plot.-the-first-plot-i-created-simply-counted-the-types-of-trailers-which-is-not-what-i-wanted-to-show." class="section level4">
+<h4>The average trailer times were determined previously in the data manipulation. Using the average times for the trailers gives a more representative value and graph than using the times for each trailer. To visualize the changes trailer types can have on flooring times, I want to use a bar plot. The first plot I created simply counted the types of trailers, which is not what I wanted to show.</h4>
+</div>
+<div id="i-switched-from-using-geom_bar-to-geom_col-and-was-then-able-to-have-the-y-axis-display-the-average-flooring-times-for-each-unit-size-with-the-differences-due-to-unit-type-displayed-by-the-legend.-it-is-interested-to-see-that-there-is-a-difference-between-the-timing-for-open-units-and-office-units.-although-there-are-additional-complexities-in-office-trailers-the-flooring-process-is-not-effected-by-this.-the-differences-within-this-are-likely-due-to-the-process-improvements-made-while-data-was-being-collected." class="section level4">
+<h4>I switched from using geom_bar() to geom_col() and was then able to have the y-axis display the average flooring times for each unit size, with the differences due to unit type displayed by the legend. It is interested to see that there is a difference between the timing for open units and office units. Although there are additional complexities in office trailers, the flooring process is not effected by this. The differences within this are likely due to the process improvements made while data was being collected.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="one-method-for-improving-the-production-process-that-has-been-implemented-has-been-to-increase-the-amount-of-workers-taking-part-in-the-insulation-process-of-flooring.-there-have-been-questions-from-workers-as-to-how-effective-this-actually-is-as-it-appears-to-increase-the-amount-of-worker-hours-which-may-out-weigh-the-positive-impact-of-decreasing-the-overall-flooring-time." class="section level4">
+<h4>One method for improving the production process that has been implemented has been to increase the amount of workers taking part in the insulation process of flooring. There have been questions from workers as to how effective this actually is, as it appears to increase the amount of worker hours, which may out weigh the positive impact of decreasing the overall flooring time.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="based-on-this-graph-the-general-trend-shows-that-as-the-worker-hours-increase-so-does-the-time-to-complete-the-floor.-this-doesnt-speak-to-how-the-overall-process-has-been-effected-by-the-small-change-to-the-insulation-process." class="section level4">
+<h4>Based on this graph, the general trend shows that as the worker hours increase, so does the time to complete the floor. This doesn’t speak to how the overall process has been effected by the small change to the insulation process.</h4>
+</div>
+<div id="the-subfloor-process-has-also-been-identified-as-one-of-the-longer-subprocesses-of-the-flooring-process.-the-following-graph-was-created-to-show-the-effect-of-worker-hours-on-this-process." class="section level4">
+<h4>The subfloor process has also been identified as one of the longer subprocesses of the flooring process. The following graph was created to show the effect of worker hours on this process.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="as-shown-above-the-more-worker-hours-spent-on-the-subfloor-the-longer-it-takes-to-complete-flooring.-as-with-the-insulation-process-this-does-not-accurately-speak-to-the-effect-of-changing-the-number-of-workers.-there-could-be-one-worker-working-for-three-hours-or-there-could-be-three-workers-working-for-one-hour-and-both-would-have-the-same-number-of-worker-hours.-to-show-this-variation-the-following-graph-shows-that-an-increase-in-worker-hours-doesnt-always-lead-to-an-increase-in-subfloor-time." class="section level4">
+<h4>As shown above, the more worker hours spent on the subfloor, the longer it takes to complete flooring. As with the insulation process, this does not accurately speak to the effect of changing the number of workers. There could be one worker working for three hours, or there could be three workers working for one hour, and both would have the same number of worker hours. To show this variation, the following graph shows that an increase in worker hours doesn’t always lead to an increase in subfloor time.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="this-graph-demonstrates-the-variation-that-is-likely-contributed-to-the-number-of-workers-assigned-to-working-on-the-subfloor." class="section level4">
+<h4>This graph demonstrates the variation that is likely contributed to the number of workers assigned to working on the subfloor.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="when-looking-at-the-effect-of-increased-worker-hours-spent-on-insulation-on-time-to-complete-the-flooring-process-it-still-appears-as-though-increasing-the-worker-hours-is-related-to-an-increase-in-time-to-complete-the-flooring-process.-this-is-interesting-because-within-the-production-process-there-has-been-an-overall-decrease-in-flooring-times.-in-addition-to-adding-more-workers-to-the-insulation-process-the-process-has-shifted-from-sequential-to-in-parallel.-based-on-what-appears-to-be-a-lack-of-correlation-between-increase-workers-on-the-insulation-activity-and-decreasing-the-overall-flooring-time-it-can-be-concluded-that-the-decreases-in-overall-flooring-times-are-more-likely-due-to-the-change-from-sequential-to-parallel." class="section level4">
+<h4>When looking at the effect of increased worker hours spent on insulation on time to complete the flooring process, it still appears as though increasing the worker hours is related to an increase in time to complete the flooring process. This is interesting, because within the production process, there has been an overall decrease in flooring times. In addition to adding more workers to the insulation process, the process has shifted from sequential to in parallel. Based on what appears to be a lack of correlation between increase workers on the insulation activity and decreasing the overall flooring time, it can be concluded that the decreases in overall flooring times are more likely due to the change from sequential to parallel.</h4>
+</div>
+<div id="to-further-illustrate-the-effect-of-the-process-changes-from-sequential-to-parallel-the-insulation-time-has-been-compared-to-the-overall-flooring-time." class="section level4">
+<h4>To further illustrate the effect of the process changes from sequential to parallel, the insulation time has been compared to the overall flooring time.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="as-you-can-see-in-the-graph-the-longer-the-insulation-time-the-longer-the-flooring-time.-in-the-earlier-graphs-the-impact-of-increased-worker-hours-was-used-to-evaluate-how-effective-increasing-the-number-of-workers-on-the-insulation-activity-was-in-decreasing-the-insulation-time-and-therefore-the-flooring-time.-from-here-we-can-see-that-it-is-evident-that-if-insulation-time-is-decreased-so-is-time-to-complete-flooring.-this-suggests-that-instead-of-comparing-direct-worker-hours-to-flooring-time-it-may-be-more-effective-to-apply-the-number-of-workers-as-a-weighting-to-the-values-which-may-provide-a-more-accurate-depiction-of-how-increasing-workers-decreased-insulation-time-and-therefore-most-likely-also-the-flooring-time." class="section level4">
+<h4>As you can see in the graph, the longer the insulation time, the longer the flooring time. In the earlier graphs, the impact of increased worker hours was used to evaluate how effective increasing the number of workers on the insulation activity was in decreasing the insulation time and therefore the flooring time. From here, we can see that it is evident that if insulation time is decreased, so is time to complete flooring. This suggests that instead of comparing direct worker hours to flooring time, it may be more effective to apply the number of workers as a weighting to the values, which may provide a more accurate depiction of how increasing workers decreased insulation time and therefore most likely, also the flooring time.</h4>
+</div>
+<div id="for-a-final-visualization-the-graph-below-shows-the-changes-in-flooring-times-for-40x12-units.-these-are-the-units-that-have-been-most-commonly-produced-during-the-data-collection-process-and-therefore-have-undergone-the-most-process-changes." class="section level4">
+<h4>For a final visualization, the graph below shows the changes in flooring times for 40x12 units. These are the units that have been most commonly produced during the data collection process, and therefore have undergone the most process changes.</h4>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<div id="in-summary-i-was-able-to-successfully-answer-three-out-of-four-questions.-as-unit-size-increases-flooring-times-also-increase.-average-flooring-times-were-determined-based-on-unit-size-and-type.-unfortunately-the-data-collected-did-not-provide-an-accurate-representation-of-the-effect-increased-resources-has-had-in-the-production-process.-this-may-seem-like-a-negative-realisation-but-in-reality-it-will-allow-me-to-collect-improved-data-in-the-future.-despite-this-mishap-it-was-determined-that-decreasing-the-insulation-process-time-also-decreases-the-overall-flooring-process-which-was-the-goal-of-the-changes.-as-for-whether-or-not-this-can-be-done-by-increasing-the-number-of-workers-completing-the-flooring-process-future-data-is-required-to-quantify-this." class="section level4">
+<h4>In summary, I was able to successfully answer three out of four questions. As unit size increases, flooring times also increase. Average flooring times were determined based on unit size and type. Unfortunately, the data collected did not provide an accurate representation of the effect increased resources has had in the production process. This may seem like a negative realisation, but in reality it will allow me to collect improved data in the future. Despite this mishap, it was determined that decreasing the insulation process time also decreases the overall flooring process, which was the goal of the changes. As for whether or not this can be done by increasing the number of workers completing the flooring process, future data is required to quantify this.</h4>
+</div>
+</div>

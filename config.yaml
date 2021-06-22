@@ -17,13 +17,15 @@ menu:
     - name: About
       url: /about/
     - name: GitHub
-      url: https://github.com/rstudio/blogdown
+      url: https://github.com/lyssalu98/
     - name: Twitter
-      url: https://twitter.com/rstudio
+      url: https://twitter.com/lyssalu98
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/alyssa-van-de-riet-98938418a/
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
-  description: A website built through Hugo and blogdown.
+  description: My website for the last assignment and final project for MBA 6693
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
