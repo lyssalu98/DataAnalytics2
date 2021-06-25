@@ -44,128 +44,28 @@ output: html_document
 <iframe src="https://lyssalu98.shinyapps.io/DataAnalytics2/" height="800" width="100%" frameborder="no">
 </iframe>
 </div>
-<div id="section-canadian-figure-skaters-are-some-of-the-best-in-the-world.-the-following-graph-shows-scores-for-the-various-canadian-figure-skaters-in-competitions." class="section level4">
-<h4>Canadian figure skaters are some of the best in the world. The following graph shows scores for the various Canadian figure skaters in competitions.</h4>
-<pre class="r"><code>canadian_results &lt;- performances %&gt;%
-  select(everything()) %&gt;%
-  filter(program == &quot;LADIES FREE SKATING&quot;, nation == &quot;CAN&quot;)
-
-canadian_results %&gt;%
-  tail(10) %&gt;%
-  ggplot( aes(x=competition, y=rank)) +
-    geom_line( color=&quot;grey&quot;) +
-    geom_point(shape=10, color=&quot;black&quot;, fill=&quot;#69b3a2&quot;, size=6) +
-    theme_ipsum() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-    ggtitle(&quot;Results of Canadian Competitors&quot;) +
-    labs(colour = &quot;name&quot;) </code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
-## font family not found in Windows font database</code></pre>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database</code></pre>
+<div id="section-canadian-figure-skaters-are-some-of-the-best-in-the-world.-the-following-graph-shows-rankings-of-the-various-canadian-figure-skaters-in-competitions." class="section level4">
+<h4>Canadian figure skaters are some of the best in the world. The following graph shows rankings of the various Canadian figure skaters in competitions.</h4>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>canadian_results  </code></pre>
-<pre><code>## # A tibble: 20 x 11
-##    performance_id competition      program   name   nation  rank starting_number
-##    &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;
-##  1 3e969440ef     Grand Prix Fina~ LADIES F~ Kaetl~ CAN        5               4
-##  2 b9208a8511     ISU Four Contin~ LADIES F~ Alain~ CAN        8               7
-##  3 f689dd7cff     ISU Four Contin~ LADIES F~ Kaetl~ CAN        6              21
-##  4 d707eb4832     ISU Four Contin~ LADIES F~ Gabri~ CAN        3              22
-##  5 19a3ae3f4d     ISU GP 2016 Pro~ LADIES F~ Gabri~ CAN        4               6
-##  6 82918ed8f8     ISU GP 2016 Ska~ LADIES F~ Alain~ CAN        4               8
-##  7 0d45fb5765     ISU GP 2016 Ska~ LADIES F~ Kaetl~ CAN        2              10
-##  8 df01cedeba     ISU GP 2017 Bri~ LADIES F~ Gabri~ CAN        8              10
-##  9 feecc5ce51     ISU GP 2017 Ska~ LADIES F~ Alain~ CAN       11               2
-## 10 b51da21253     ISU GP 2017 Ska~ LADIES F~ Larky~ CAN       12               3
-## 11 f09ce03d6b     ISU GP 2017 Ska~ LADIES F~ Kaetl~ CAN        1              11
-## 12 7d9640cf7e     ISU GP Audi Cup~ LADIES F~ Kaetl~ CAN        3              11
-## 13 010e399739     ISU GP Audi Cup~ LADIES F~ Gabri~ CAN        7              10
-## 14 f9763670b4     ISU GP Internat~ LADIES F~ Kaetl~ CAN        4              11
-## 15 79ea386262     ISU GP NHK Trop~ LADIES F~ Alain~ CAN       11               4
-## 16 57553b2293     ISU GP NHK Trop~ LADIES F~ Alain~ CAN        9               1
-## 17 e555e60a9d     ISU GP Trophee ~ LADIES F~ Gabri~ CAN        6              12
-## 18 d553ae74f6     ISU Grand Prix ~ LADIES F~ Kaetl~ CAN        4               4
-## 19 801426936c     ISU World Figur~ LADIES F~ Gabri~ CAN        3              23
-## 20 27099b6d18     ISU World Figur~ LADIES F~ Kaetl~ CAN        2              24
+</div>
+<div id="section-from-this-graph-we-can-see-that-kaetlyn-osmond-is-most-often-in-the-top-5-of-her-age-group.-you-can-look-more-closely-at-her-scores-for-each-competition-below." class="section level4">
+<h4>From this graph we can see that Kaetlyn Osmond is most often in the top 5 of her age group. You can look more closely at her scores for each competition below.</h4>
+<pre class="r"><code>osmond &lt;- canadian_results %&gt;%
+  select(everything()) %&gt;%
+  filter(name == &quot;Kaetlyn OSMOND&quot;)
+
+osmond</code></pre>
+<pre><code>## # A tibble: 8 x 11
+##   performance_id competition       program   name   nation  rank starting_number
+##   &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;
+## 1 3e969440ef     Grand Prix Final~ LADIES F~ Kaetl~ CAN        5               4
+## 2 f689dd7cff     ISU Four Contine~ LADIES F~ Kaetl~ CAN        6              21
+## 3 0d45fb5765     ISU GP 2016 Skat~ LADIES F~ Kaetl~ CAN        2              10
+## 4 f09ce03d6b     ISU GP 2017 Skat~ LADIES F~ Kaetl~ CAN        1              11
+## 5 7d9640cf7e     ISU GP Audi Cup ~ LADIES F~ Kaetl~ CAN        3              11
+## 6 f9763670b4     ISU GP Internati~ LADIES F~ Kaetl~ CAN        4              11
+## 7 d553ae74f6     ISU Grand Prix o~ LADIES F~ Kaetl~ CAN        4               4
+## 8 27099b6d18     ISU World Figure~ LADIES F~ Kaetl~ CAN        2              24
 ## # ... with 4 more variables: total_segment_score &lt;dbl&gt;,
 ## #   total_element_score &lt;dbl&gt;, total_component_score &lt;dbl&gt;,
 ## #   total_deductions &lt;dbl&gt;</code></pre>

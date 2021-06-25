@@ -39,7 +39,7 @@ ladies_free <- performances %>%
   arrange(nation, name)
 
 ```
-### Figure skaters from all over the world compete against each other for the title of best in the world. 
+#### Figure skaters from all over the world compete against each other for the title of best in the world. 
 
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 competitors <- ladies_free %>% 
@@ -94,24 +94,30 @@ t
 height="800" width="100%" frameborder="no"></iframe>
 
 
-#### Canadian figure skaters are some of the best in the world. The following graph shows scores for the various Canadian figure skaters in competitions. 
+#### Canadian figure skaters are some of the best in the world. The following graph shows rankings of the various Canadian figure skaters in competitions. 
 
-```{r}
+```{r warning=FALSE, message=FALSE, echo=FALSE}
 canadian_results <- performances %>%
   select(everything()) %>%
   filter(program == "LADIES FREE SKATING", nation == "CAN")
 
-canadian_results %>%
-  tail(10) %>%
-  ggplot( aes(x=competition, y=rank)) +
-    geom_line( color="grey") +
-    geom_point(shape=10, color="black", fill="#69b3a2", size=6) +
-    theme_ipsum() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+
+cr <- canadian_results %>%
+  ggplot(aes(x=competition, y=rank, color = name)) +
+    geom_point() +
+    theme() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.title = element_text("Competitors")) +
     ggtitle("Results of Canadian Competitors") +
-    labs(colour = "name") 
+    labs(x="Competition", y="Ranking") 
     
       
-canadian_results  
+cr 
 ```
+
+#### From this graph we can see that Kaetlyn Osmond is most often in the top 5 of her age group. You can look more closely at her scores for each competition below. 
+
+<iframe src="https://lyssalu98.shinyapps.io/DataAnalytics3/"
+height="800" width="100%" frameborder="no"></iframe>
+
+
 
