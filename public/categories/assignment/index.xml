@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>assignment on A Hugo website</title>
+    <link>/categories/assignment/</link>
+    <description>Recent content in assignment on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/assignment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment A05 - EDA2</title>
+      <link>/2021/06/22/assignment-a05-eda2/</link>
+      <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/22/assignment-a05-eda2/</guid>
+      <description>DatasetThe dataset used for this assignment was taken from the larger dataset I will be using for my Master’s thesis. It includes information from time studies of an off-site modulate construction flooring process. The process produces modular office trailers, commonly referred to as either “units” or “trailers”. The initial data set is called “flooring”, and has been manipulated into subsets named “flooring_avg” and “worker_effect”.When analysing this data, there are many questions I would like to answer, including the following:How does the unit size effect overall timing for the flooring operation?</description>
+    </item>
+    
+  </channel>
+</rss>

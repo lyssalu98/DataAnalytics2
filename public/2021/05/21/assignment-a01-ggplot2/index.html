@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Assignment A01: GGPLOT2 - A Hugo website</title>
+<meta property="og:title" content="Assignment A01: GGPLOT2 - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/lyssalu98/">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/alyssa-van-de-riet-98938418a/">LinkedIn</a></li>
+    
+    <li><a href="https://twitter.com/lyssalu98">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Assignment A01: GGPLOT2</h1>
+
+    
+    <span class="article-date">2021-05-21</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/05/21/assignment-a01-ggplot2/index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="within-this-assignment" class="section level2">
+<h2>Within this assignment:</h2>
+<ul>
+<li>Categorical data visualization</li>
+<li>Numerical data visualization</li>
+<li>Discussion</li>
+</ul>
+</div>
+<div id="categorical-data-visualization" class="section level2">
+<h2>Categorical Data Visualization</h2>
+<div id="species-petal-widths" class="section level3">
+<h3>Species Petal Widths</h3>
+<p><img src="/2021/05/21/assignment-a01-ggplot2/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="species-petal-lengths" class="section level3">
+<h3>Species Petal Lengths</h3>
+<p><img src="/2021/05/21/assignment-a01-ggplot2/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="numerical-data-visualization" class="section level2">
+<h2>Numerical Data Visualization</h2>
+<div id="sepal-length-vs-width" class="section level3">
+<h3>Sepal Length vs Width</h3>
+<pre class="r"><code>ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
+  geom_point() + 
+  theme_light() +
+  ggtitle(&quot;Comparing Sepal Lengths and Widths&quot;) +
+  xlab(&quot;Sepal Length&quot;) + ylab(&quot;Sepal Width&quot;)</code></pre>
+<p><img src="/2021/05/21/assignment-a01-ggplot2/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="petal-length-vs-sepal-lengths" class="section level3">
+<h3>Petal Length vs Sepal Lengths</h3>
+<pre class="r"><code>ggplot(iris, aes(Petal.Length, Sepal.Length, color = Species)) + 
+  geom_point() + 
+  theme_light() +
+  ggtitle(&quot;Comparing Petal and Sepal Lengths&quot;) +
+  xlab(&quot;Petal Length&quot;) + ylab(&quot;Sepal Length&quot;)</code></pre>
+<p><img src="/2021/05/21/assignment-a01-ggplot2/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+<div id="within-this-assignment-i-had-difficulties-finding-a-dataset-that-provided-data-that-i-felt-would-allow-me-to-adequately-meet-the-assignment-requirements.-within-the-coding-i-found-i-struggled-with-remembering-what-command-to-use-when-which-drove-home-the-lesson-that-datacamp-should-only-be-used-for-practice.-i-opted-for-the-iris-dataset-since-it-had-designated-categories-in-the-form-of-species.-it-is-interesting-to-see-the-behind-the-scenes-of-how-coding-can-be-used-for-data-analysis.-creating-these-plots-helped-show-the-differences-betweent-the-iris-species-which-the-average-person-would-not-have-originally-considered." class="section level4">
+<h4>Within this assignment, I had difficulties finding a dataset that provided data that I felt would allow me to adequately meet the assignment requirements. Within the coding, I found I struggled with remembering what command to use when, which drove home the lesson that DataCamp should only be used for practice. I opted for the Iris dataset since it had designated categories in the form of species. It is interesting to see the “behind the scenes” of how coding can be used for data analysis. Creating these plots helped show the differences betweent the iris species, which the average person would not have originally considered.</h4>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

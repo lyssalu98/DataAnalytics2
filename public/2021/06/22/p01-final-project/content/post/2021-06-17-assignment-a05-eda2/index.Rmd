@@ -1,0 +1,191 @@
+---
+title: 'Assignment A05: EDA2'
+author: Alyssa van de Riet
+date: '2021-06-17'
+slug: assignment-a05-eda2
+categories:
+  - EDA2
+  - tidyverse
+  - assignment
+tags: []
+---
+
+
+
+```{r echo=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(tidymodels)
+library(ggtext)
+library(plyr)
+
+```
+
+### Dataset
+
+#### The dataset used for this assignment was taken from the larger dataset I will be using for my Master's thesis. It includes information from time studies of an off-site modulate construction flooring process. The process produces modular office trailers, commonly referred to as either "units" or "trailers". The initial data set is called "flooring", and has been manipulated into subsets named "flooring_avg" and "worker_effect".
+
+```{r echo=FALSE, message=FALSE}
+flooring <- read_csv("flooring_times.csv")
+
+
+```
+#### When analysing this data, there are many questions I would like to answer, including the following:   
+
+1. How does the unit size effect overall timing for the flooring operation?
+
+2. What are the average times for each unit size and type?
+
+3. Does applying more resources (such as workers) to an activity improve the overall activity time?
+
+4. Is there a relationship between the time to complete insulation and the time to complete the overall flooring process?
+
+### Manipulating the dataset
+
+#### In order to make my data easier to work with, I manipulated it to create subsets, which will help me answer the specific questions I have identified. When creating the floor_averages subset, I noticed that for 40x12 Open units, the average value was returned as "NA". Because I am familiar with my data, I knew that there had been many 40x12 units captured with the data and began troubleshooting this error. I then realised that I had not removed missing values, which was causing this, when I attempted to use the ddply function. After removing these values, the average time for this unit could be calculated.
+
+
+
+```{r echo=FALSE, message=FALSE}
+floor_avg <- ddply(flooring, c("Size", "Type"), summarise,
+               mean = mean(Total_Flooring_Time, na.rm = TRUE))
+```
+
+
+```{r echo=FALSE, message=FALSE}
+worker_effect <- flooring %>%
+  select(Unit, Size, Total_Flooring_Time, contains("insu")) %>%
+  na.omit()
+
+
+```
+```{r}
+flooring
+floor_avg
+worker_effect
+```
+
+
+### Discoveries and Insights
+#### To determine the effect of trailer size on the time it takes to complete the flooring on a unit, the graph below was created.
+```{r vis-res-1, echo=FALSE, out.width="100%", message=FALSE}
+time_size_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Total_Flooring_Time ~ Square_Footage, data = flooring)
+time_size_fit_tidy <- tidy(time_size_fit$fit) 
+time_size_fit_aug  <- augment(time_size_fit$fit) %>%
+  mutate(res_cat = ifelse(.resid > 0, TRUE, FALSE))
+p <- ggplot(data = time_size_fit_aug, 
+            aes(x = Square_Footage, y = Total_Flooring_Time)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") +
+  labs(
+    title = "The Effect of Size on Flooring Time",
+    subtitle = "May/June 2021",
+    x = "Trailer Size (square feet)",
+    y = "Flooring Time (hours)"
+    ) +
+  coord_cartesian(xlim = c(0, 1000), ylim = c(0, 12)) +
+  theme(plot.subtitle = element_text(colour = "#E48957", face = "bold"))
+p
+```
+
+#### As shown in the graph, the general trend of the data is that as trailer size increases, so does the time required to complete the flooring on the trailer. This is generally what is expected. By plotting this relationship you can also see the variations within the 40x12 Trailer units (which have a square footage of 480 sq ft). When these units were being made, changes were being made to the flooring process. The variations are visualized within the "Effect of Size on Flooring Time" graph.
+
+#### The average trailer times were determined previously in the data manipulation. Using the average times for the trailers gives a more representative value and graph than using the times for each trailer. To visualize the changes trailer types can have on flooring times, I want to use a bar plot. The first plot I created simply counted the types of trailers, which is not what I wanted to show. 
+
+#### I switched from using geom_bar() to geom_col() and was then able to have the y-axis display the average flooring times for each unit size, with the differences due to unit type displayed by the legend. It is interested to see that there is a difference between the timing for open units and office units. Although there are additional complexities in office trailers, the flooring process is not effected by this. The differences within this are likely due to the process improvements made while data was being collected.
+
+```{r echo=FALSE, message=FALSE}
+p2 <- ggplot(floor_avg, aes(x=Size, y=mean, fill=Type )) + 
+  geom_col( ) +
+  scale_fill_hue(c = 40) +
+  theme() +
+  labs(title = "Average Trailer Times",
+    subtitle = "May/June 2021",
+    x = "Trailer Size",
+    y = "Average Flooring Time (hours)")
+
+p2
+```
+
+#### One method for improving the production process that has been implemented has been to increase the amount of workers taking part in the insulation process of flooring. There have been questions from workers as to how effective this actually is, as it appears to increase the amount of worker hours, which may out weigh the positive impact of decreasing the overall flooring time. 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+flooring %>%
+  ggplot(aes(x=Total_WH, y=Total_Flooring_Time)) +
+  geom_point(color="black", fill="#69b3a2", na.rm = TRUE) +
+  geom_smooth(method=lm , color="purple", fill="#69b3a2", se=TRUE) +
+  theme() +
+  labs(title = "The Effect of Increased Worker Hours on Flooring Time", x = "Worker Hours Spent on Flooring", y = "Time to Complete Flooring")
+```
+
+#### Based on this graph, the general trend shows that as the worker hours increase, so does the time to complete the floor. This doesn't speak to how the overall process has been effected by the small change to the insulation process.
+
+#### The subfloor process has also been identified as one of the longer subprocesses of the flooring process. The following graph was created to show the effect of worker hours on this process. 
+
+```{r echo=FALSE, message=FALSE, warning = FALSE}
+flooring %>%
+  ggplot(aes(x=WH_sub, y=Total_Flooring_Time)) +
+  geom_point(color="black", fill="#69b3a2", na.rm = TRUE) +
+  geom_smooth(method=lm , color="blue", fill="#69b3a2", se=TRUE) +
+  theme() +
+  labs(title = "The Effect of Increased Worker Hours for Subfloor on Flooring Time", x = "Worker Hours Spent on Subfloor", y = "Time to Complete Flooring")
+```
+
+#### As shown above, the more worker hours spent on the subfloor, the longer it takes to complete flooring. As with the insulation process, this does not accurately speak to the effect of changing the number of workers. There could be one worker working for three hours, or there could be three workers working for one hour, and both would have the same number of worker hours. To show this variation, the following graph shows that an increase in worker hours doesn't always lead to an increase in subfloor time.
+
+```{r warning = FALSE, message=FALSE, echo=FALSE}
+flooring %>%
+  ggplot(aes(x=WH_sub, y=Subfloor)) +
+  geom_point(color="black", fill="#69b3a2", na.rm = TRUE) +
+  geom_smooth(method=lm , color="blue", fill="#69b3a2", se=TRUE) +
+  theme() +
+  labs(title = "The Effect of Increased Worker Hours for Subfloor on Subfloor Time", x = "Worker Hours Spent on Subfloor", y = "Time to Complete Subfloor")
+```
+
+#### This graph demonstrates the variation that is likely contributed to the number of workers assigned to working on the subfloor. 
+
+```{r echo=FALSE, message=FALSE}
+worker_effect %>%
+  ggplot(aes(x=WH_insu, y=Total_Flooring_Time)) +
+  geom_point(color="black", fill="#69b3a2", na.rm = TRUE) +
+  geom_smooth(method=lm , color="purple", fill="#69b3a2", se=TRUE) +
+  theme() +
+  labs(title = "The Effect of Increased Worker Hours for Insulation on Flooring Time", x = "Worker Hours Spent on Insulation", y = "Time to Complete Flooring")
+```
+
+#### When looking at the effect of increased worker hours spent on insulation on time to complete the flooring process, it still appears as though increasing the worker hours is related to an increase in time to complete the flooring process. This is interesting, because within the production process, there has been an overall decrease in flooring times. In addition to adding more workers to the insulation process, the process has shifted from sequential to in parallel. Based on what appears to be a lack of correlation between increase workers on the insulation activity and decreasing the overall flooring time, it can be concluded that the decreases in overall flooring times are more likely due to the change from sequential to parallel. 
+
+#### To further illustrate the effect of the process changes from sequential to parallel, the insulation time has been compared to the overall flooring time.
+
+```{r echo=FALSE, message=FALSE}
+worker_effect %>%
+  ggplot(aes(x=Insulation, y=Total_Flooring_Time)) +
+  geom_point(color="black", fill="#69b3a2", na.rm = TRUE) +
+  geom_smooth(method=lm , color="purple", fill="#69b3a2", se=TRUE) +
+  theme() +
+  labs(title = "The Effect of Insulation Times on Flooring Time", x = "Insulation Time", y = "Time to Complete Flooring")
+```
+
+#### As you can see in the graph, the longer the insulation time, the longer the flooring time. In the earlier graphs, the impact of increased worker hours was used to evaluate how effective increasing the number of workers on the insulation activity was in decreasing the insulation time and therefore the flooring time. From here, we can see that it is evident that if insulation time is decreased, so is time to complete flooring. This suggests that instead of comparing direct worker hours to flooring time, it may be more effective to apply the number of workers as a weighting to the values, which may provide a more accurate depiction of how increasing workers decreased insulation time and therefore most likely, also the flooring time. 
+
+#### For a final visualization, the graph below shows the changes in flooring times for 40x12 units. These are the units that have been most commonly produced during the data collection process, and therefore have undergone the most process changes. 
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+p2 <- ggplot(flooring, aes(x=c("40x12"), y=Total_Flooring_Time, fill=Type )) + 
+  geom_col(na.rm = TRUE) +
+  scale_fill_hue(c = 40) +
+  theme() +
+  labs(title = "Flooring Times",
+    subtitle = "May/June 2021",
+    x = "Trailer Size",
+    y = "Total Flooring Time (hours)")
+
+```
+
+
+### Summary
+
+#### In summary, I was able to successfully answer three out of four questions. As unit size increases, flooring times also increase. Average flooring times were determined based on unit size and type. Unfortunately, the data collected did not provide an accurate representation of the effect increased resources has had in the production process. This may seem like a negative realisation, but in reality it will allow me to collect improved data in the future. Despite this mishap, it was determined that decreasing the insulation process time also decreases the overall flooring process, which was the goal of the changes. As for whether or not this can be done by increasing the number of workers completing the flooring process, future data is required to quantify this. 

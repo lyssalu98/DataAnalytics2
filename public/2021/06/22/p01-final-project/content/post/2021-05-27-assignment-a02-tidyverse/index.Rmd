@@ -1,0 +1,120 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: Alyssa van de Riet
+date: '2021-05-27'
+slug: assignment-a02-tidyverse
+categories:
+  - tidyverse
+  - dplyr
+tags: []
+---
+
+### Within this assignment:
+  * One table verbs
+  * Two table verbs
+  * Pivoting
+  * Missing Values
+  * Grouping
+  * Vector
+  * Discussion
+
+## Loading Friends_Info Dataset
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+friends <- read_csv("friends_info.csv")
+
+friends
+
+```
+
+## Pivoting the Data
+### The dataset selected for this assignment is not easily pivoted as all columns can stand alone and do not necessarily need to be combined to clarify or simplify the data. To exemplify this, the gather() and pivot_longer() functions were used. As shown by the output, there is not much gained from using these functions with this data (it is already fairly tidy).
+
+```{r}
+Directors <- friends %>%
+  select(Episode, `Prod.
+code`, `Rating/Share`, `Directed by`) 
+  
+
+rename(Directors, `director(s)` = `Directed by`)
+
+gather(Directors, key = `Prod. code`, value = Episode)
+
+pivot_longer(friends, 
+  Title, 
+  names_to = "ID", 
+  values_to = "code")
+
+```
+
+## Creating subsets
+
+```{r}
+James_Burrows <- friends %>%
+  filter(`Directed by` == "James Burrows")
+  
+James_Burrows %>% summarize(median(Duration))
+
+James_Burrows
+
+Pamela_Fryman <- friends %>%
+    filter(`Directed by` == "Pamela Fryman")
+
+Pamela_Fryman
+
+Michael_Lembeck <- friends %>%
+  filter(`Directed by` == "Michael Lembeck")
+
+Michael_Lembeck
+
+
+```
+
+```{r}
+Burrows_Episodes <- semi_join(James_Burrows, Directors)
+
+Burrows_Episodes
+```
+
+## Dropping missing values
+
+### In this section you can see how the Others_Episodes data frame drops from the original 229 episodes to 212 episodes, dropping not only the 15 episodes that Burrows directed, but also 2 rows with had missing values.To determine if any of the episodes directed by Burrows had missing values as well, drop_na() was used. The resulting data set still had 15 rows, indicating that there was no missing information in these rows.  
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+Others_Episodes <- anti_join(Directors, Burrows_Episodes) %>%
+  drop_na()
+
+Others_Episodes
+
+Burrows_Episodes %>% drop_na()
+
+Burrows_Episodes
+```
+
+```{r}
+rename(friends, Director = `Directed by`, Writers = `Written by`, USviews = `U.S. viewers`, code = `Prod.\ncode`, RatingperShare = `Rating/Share`)
+
+```
+## Grouping Data
+### Due to the nature of the data within the James Burrows dataset, when grouping the data by Production code there is no change to the order. This is because the production codes are unique identifiers. However, using the order command allows this to happen. This is shown again in the Michael Lembeck dataset and the Title variable. 
+
+```{r}
+James_Burrows %>% group_by(`Prod.
+code`) 
+
+James_Burrows[order(James_Burrows$`Prod.
+code`),]
+
+Michael_Lembeck %>% group_by(`Title`) 
+
+James_Burrows[order(James_Burrows$`Title`),]
+```
+
+## Discussion
+### This assignment caused various headaches, and ultimately I was unable to complete the assignment in the way I had originally envisioned and mapped out while looking at the dataset. The variable names with spaces in them caused the most problems, particularly since the name contained "by". I will keep this in mind in the future when I create a dataset as it may cause myself and others headaches down the road. I had difficulties this time around finding a dataset that would be fully suitable for the assignment, which is shown by the pivoting part of my assignment. It can be difficulty to determine the suitability of the data before you are actually in the data. Although there were some challenges with the assignment, I did enjoy it because I do like a challenge. I also enjoyed getting to use this unique dataset, since I am a big Friends fan! 

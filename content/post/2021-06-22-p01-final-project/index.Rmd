@@ -1,0 +1,116 @@
+---
+title: P01 Final Project
+author: Alyssa van de Riet
+date: '2021-06-22'
+slug: p01-final-project
+categories:
+  - EDA2
+  - tidyverse
+tags: []
+runtime: shiny
+output: html_document
+---
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(plyr)
+library(shiny)
+library(leaflet)
+library(hrbrthemes)
+
+```
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+performances <- read_csv("performances.csv")
+
+```
+
+### Analysing Ladies Free Skating Results
+
+#### To begin, a subset (ladies_free) was created, as shown below.
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+ladies_free <- performances %>% 
+  select(everything()) %>%
+  filter(program == "LADIES FREE SKATING") %>%
+  arrange(nation, name)
+
+```
+### Figure skaters from all over the world compete against each other for the title of best in the world. 
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+competitors <- ladies_free %>% 
+  select(everything()) %>% 
+  count(c("nation", "name"))
+
+```
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+nations_count <- competitors %>%
+  select(nation) %>%
+  count("nation")
+
+```
+
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+mybins <- seq(4, 6.5, by=0.5)
+mypalette <- colorBin( palette="Okabe-Ito", domain=nations_count$nation, na.color="transparent", bins=mybins)
+
+mytext <- paste(
+   "Nation: ", nations_count$nation, "<br/>", 
+   "Number of Competitors: ", nations_count$freq, "<br/>") %>%
+  lapply(htmltools::HTML)
+
+m <- nations_count %>%
+  leaflet() %>% 
+  addTiles()  %>% 
+  setView(lat=-27, lng=170 , zoom=2) %>%
+  addProviderTiles("Esri.WorldTerrain")
+  
+m
+```  
+
+#### The chart below shows the breakdown of the number of competitors from each country. Japan and Russia have the largest representation, followed by the United States and subsequently Korea. Surprisingly, Canada only has four competitors, placing it 5th in terms of representation.
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+t <- ggplot(competitors, aes(x=nation, fill = nation)) + 
+  geom_bar( ) +
+  theme_ipsum() +
+  theme(legend.position="none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  ggtitle("Competitors by Country") + 
+  xlab("Country") + 
+  ylab("Number of Competitors")
+
+t
+```
+
+#### You can interact with the table below to learn more about the individual competitors that represent each country.
+
+<iframe src="https://lyssalu98.shinyapps.io/DataAnalytics2/"
+height="800" width="100%" frameborder="no"></iframe>
+
+
+#### Canadian figure skaters are some of the best in the world. The following graph shows scores for the various Canadian figure skaters in competitions. 
+
+```{r}
+canadian_results <- performances %>%
+  select(everything()) %>%
+  filter(program == "LADIES FREE SKATING", nation == "CAN")
+
+canadian_results %>%
+  tail(10) %>%
+  ggplot( aes(x=competition, y=rank)) +
+    geom_line( color="grey") +
+    geom_point(shape=10, color="black", fill="#69b3a2", size=6) +
+    theme_ipsum() +
+    ggtitle("Results of Canadian Competitors") +
+    labs(colour = "name") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+      
+canadian_results  
+```
+

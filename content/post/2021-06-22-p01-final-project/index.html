@@ -1,0 +1,96 @@
+---
+title: P01 Final Project
+author: Alyssa van de Riet
+date: '2021-06-22'
+slug: p01-final-project
+categories:
+  - EDA2
+  - tidyverse
+tags: []
+runtime: shiny
+output: html_document
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<script src="{{< blogdown/postref >}}index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="{{< blogdown/postref >}}index_files/jquery/jquery.min.js"></script>
+<link href="{{< blogdown/postref >}}index_files/leaflet/leaflet.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/leaflet/leaflet.js"></script>
+<link href="{{< blogdown/postref >}}index_files/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/proj4/proj4.min.js"></script>
+<script src="{{< blogdown/postref >}}index_files/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="{{< blogdown/postref >}}index_files/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="{{< blogdown/postref >}}index_files/leaflet-binding/leaflet.js"></script>
+<script src="{{< blogdown/postref >}}index_files/leaflet-providers/leaflet-providers_1.9.0.js"></script>
+<script src="{{< blogdown/postref >}}index_files/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+
+
+<div id="section-analysing-ladies-free-skating-results" class="section level3">
+<h3>Analysing Ladies Free Skating Results</h3>
+<div id="section-to-begin-a-subset-ladies_free-was-created-as-shown-below." class="section level4">
+<h4>To begin, a subset (ladies_free) was created, as shown below.</h4>
+</div>
+</div>
+<div id="section-figure-skaters-from-all-over-the-world-compete-against-each-other-for-the-title-of-best-in-the-world." class="section level3">
+<h3>Figure skaters from all over the world compete against each other for the title of best in the world.</h3>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldTerrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"setView":[[-27,170],2,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="section-the-chart-below-shows-the-breakdown-of-the-number-of-competitors-from-each-country.-japan-and-russia-have-the-largest-representation-followed-by-the-united-states-and-subsequently-korea.-surprisingly-canada-only-has-four-competitors-placing-it-5th-in-terms-of-representation." class="section level4">
+<h4>The chart below shows the breakdown of the number of competitors from each country. Japan and Russia have the largest representation, followed by the United States and subsequently Korea. Surprisingly, Canada only has four competitors, placing it 5th in terms of representation.</h4>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="section-you-can-interact-with-the-table-below-to-learn-more-about-the-individual-competitors-that-represent-each-country." class="section level4">
+<h4>You can interact with the table below to learn more about the individual competitors that represent each country.</h4>
+<iframe src="https://lyssalu98.shinyapps.io/DataAnalytics2/" height="800" width="100%" frameborder="no">
+</iframe>
+</div>
+<div id="section-canadian-figure-skaters-are-some-of-the-best-in-the-world.-the-following-graph-shows-scores-for-the-various-canadian-figure-skaters-in-competitions." class="section level4">
+<h4>Canadian figure skaters are some of the best in the world. The following graph shows scores for the various Canadian figure skaters in competitions.</h4>
+<pre class="r"><code>canadian_results &lt;- performances %&gt;%
+  select(everything()) %&gt;%
+  filter(program == &quot;LADIES FREE SKATING&quot;, nation == &quot;CAN&quot;)
+
+canadian_results %&gt;%
+  tail(10) %&gt;%
+  ggplot( aes(x=competition, y=rank)) +
+    geom_line( color=&quot;grey&quot;) +
+    geom_point(shape=21, color=&quot;black&quot;, fill=&quot;#69b3a2&quot;, size=6) +
+    theme_ipsum() +
+    ggtitle(&quot;Results of Canadian Competitors&quot;) +
+    labs(colour = &quot;name&quot;)</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+## font family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+</div>
