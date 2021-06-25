@@ -30,7 +30,6 @@ performances <- read_csv("performances.csv")
 
 ### Analysing Ladies Free Skating Results
 
-#### To begin, a subset (ladies_free) was created, as shown below.
 
 ```{r warning=FALSE, message=FALSE, echo=FALSE}
 ladies_free <- performances %>% 
@@ -119,5 +118,5 @@ cr
 <iframe src="https://lyssalu98.shinyapps.io/DataAnalytics3/"
 height="800" width="100%" frameborder="no"></iframe>
 
-
+#### It is good to see that Canadians are amoung the top figure skaters in the world, giving other countries a run for their money!
 

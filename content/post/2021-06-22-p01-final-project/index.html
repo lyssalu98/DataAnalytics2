@@ -27,14 +27,11 @@ output: html_document
 
 <div id="section-analysing-ladies-free-skating-results" class="section level3">
 <h3>Analysing Ladies Free Skating Results</h3>
-<div id="section-to-begin-a-subset-ladies_free-was-created-as-shown-below." class="section level4">
-<h4>To begin, a subset (ladies_free) was created, as shown below.</h4>
-</div>
-</div>
-<div id="section-figure-skaters-from-all-over-the-world-compete-against-each-other-for-the-title-of-best-in-the-world." class="section level3">
-<h3>Figure skaters from all over the world compete against each other for the title of best in the world.</h3>
+<div id="section-figure-skaters-from-all-over-the-world-compete-against-each-other-for-the-title-of-best-in-the-world." class="section level4">
+<h4>Figure skaters from all over the world compete against each other for the title of best in the world.</h4>
 <div id="htmlwidget-1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldTerrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"setView":[[-27,170],2,[]]},"evals":[],"jsHooks":[]}</script>
+</div>
 <div id="section-the-chart-below-shows-the-breakdown-of-the-number-of-competitors-from-each-country.-japan-and-russia-have-the-largest-representation-followed-by-the-united-states-and-subsequently-korea.-surprisingly-canada-only-has-four-competitors-placing-it-5th-in-terms-of-representation." class="section level4">
 <h4>The chart below shows the breakdown of the number of competitors from each country. Japan and Russia have the largest representation, followed by the United States and subsequently Korea. Surprisingly, Canada only has four competitors, placing it 5th in terms of representation.</h4>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
@@ -50,24 +47,10 @@ output: html_document
 </div>
 <div id="section-from-this-graph-we-can-see-that-kaetlyn-osmond-is-most-often-in-the-top-5-of-her-age-group.-you-can-look-more-closely-at-her-scores-for-each-competition-below." class="section level4">
 <h4>From this graph we can see that Kaetlyn Osmond is most often in the top 5 of her age group. You can look more closely at her scores for each competition below.</h4>
-<pre class="r"><code>osmond &lt;- canadian_results %&gt;%
-  select(everything()) %&gt;%
-  filter(name == &quot;Kaetlyn OSMOND&quot;)
-
-osmond</code></pre>
-<pre><code>## # A tibble: 8 x 11
-##   performance_id competition       program   name   nation  rank starting_number
-##   &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;
-## 1 3e969440ef     Grand Prix Final~ LADIES F~ Kaetl~ CAN        5               4
-## 2 f689dd7cff     ISU Four Contine~ LADIES F~ Kaetl~ CAN        6              21
-## 3 0d45fb5765     ISU GP 2016 Skat~ LADIES F~ Kaetl~ CAN        2              10
-## 4 f09ce03d6b     ISU GP 2017 Skat~ LADIES F~ Kaetl~ CAN        1              11
-## 5 7d9640cf7e     ISU GP Audi Cup ~ LADIES F~ Kaetl~ CAN        3              11
-## 6 f9763670b4     ISU GP Internati~ LADIES F~ Kaetl~ CAN        4              11
-## 7 d553ae74f6     ISU Grand Prix o~ LADIES F~ Kaetl~ CAN        4               4
-## 8 27099b6d18     ISU World Figure~ LADIES F~ Kaetl~ CAN        2              24
-## # ... with 4 more variables: total_segment_score &lt;dbl&gt;,
-## #   total_element_score &lt;dbl&gt;, total_component_score &lt;dbl&gt;,
-## #   total_deductions &lt;dbl&gt;</code></pre>
+<iframe src="https://lyssalu98.shinyapps.io/DataAnalytics3/" height="800" width="100%" frameborder="no">
+</iframe>
+</div>
+<div id="section-it-is-good-to-see-that-canadians-are-amoung-the-top-figure-skaters-in-the-world-giving-other-countries-a-run-for-their-money" class="section level4">
+<h4>It is good to see that Canadians are amoung the top figure skaters in the world, giving other countries a run for their money!</h4>
 </div>
 </div>
