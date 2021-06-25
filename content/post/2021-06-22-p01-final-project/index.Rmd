@@ -107,9 +107,10 @@ canadian_results %>%
     geom_line( color="grey") +
     geom_point(shape=10, color="black", fill="#69b3a2", size=6) +
     theme_ipsum() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
     ggtitle("Results of Canadian Competitors") +
-    labs(colour = "name") +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+    labs(colour = "name") 
+    
       
 canadian_results  
 ```

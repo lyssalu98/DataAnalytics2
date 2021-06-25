@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">2 min read</span>
     
 
     <h1 class="article-title">P01 Final Project</h1>
@@ -76,93 +76,86 @@
     <div class="article-content">
       
 <script src="/2021/06/22/p01-final-project/index_files/header-attrs/header-attrs.js"></script>
+<script src="/2021/06/22/p01-final-project/index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="/2021/06/22/p01-final-project/index_files/jquery/jquery.min.js"></script>
+<link href="/2021/06/22/p01-final-project/index_files/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/2021/06/22/p01-final-project/index_files/leaflet/leaflet.js"></script>
+<link href="/2021/06/22/p01-final-project/index_files/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="/2021/06/22/p01-final-project/index_files/proj4/proj4.min.js"></script>
+<script src="/2021/06/22/p01-final-project/index_files/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="/2021/06/22/p01-final-project/index_files/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="/2021/06/22/p01-final-project/index_files/leaflet-binding/leaflet.js"></script>
+<script src="/2021/06/22/p01-final-project/index_files/leaflet-providers/leaflet-providers_1.9.0.js"></script>
+<script src="/2021/06/22/p01-final-project/index_files/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
 
 
-<pre class="r"><code>library(ggplot2)
-library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
-<pre><code>## v tibble  3.1.1     v dplyr   1.0.6
-## v tidyr   1.1.3     v stringr 1.4.0
-## v readr   1.4.0     v forcats 0.5.1
-## v purrr   0.3.4</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(tidyr)
-library(dplyr)
-library(plyr)</code></pre>
-<pre><code>## ------------------------------------------------------------------------------</code></pre>
-<pre><code>## You have loaded plyr after dplyr - this is likely to cause problems.
-## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
-## library(plyr); library(dplyr)</code></pre>
-<pre><code>## ------------------------------------------------------------------------------</code></pre>
-<pre><code>## 
-## Attaching package: &#39;plyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise,
-##     summarize</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     compact</code></pre>
-<pre class="r"><code>library(shiny)</code></pre>
-<pre class="r"><code>performances &lt;- read_csv(&quot;performances.csv&quot;)</code></pre>
-<pre><code>## 
-## -- Column specification --------------------------------------------------------
-## cols(
-##   performance_id = col_character(),
-##   competition = col_character(),
-##   program = col_character(),
-##   name = col_character(),
-##   nation = col_character(),
-##   rank = col_double(),
-##   starting_number = col_double(),
-##   total_segment_score = col_double(),
-##   total_element_score = col_double(),
-##   total_component_score = col_double(),
-##   total_deductions = col_double()
-## )</code></pre>
-<pre class="r"><code>performances</code></pre>
-<pre><code>## # A tibble: 1,726 x 11
-##    performance_id competition    program   name     nation  rank starting_number
-##    &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;
-##  1 6e4bd41ac5     Grand Prix Fi~ ICE DANC~ Anna CA~ ITA        5               1
-##  2 562c01c5a6     Grand Prix Fi~ ICE DANC~ Madison~ USA        4               2
-##  3 2de894c029     Grand Prix Fi~ ICE DANC~ Madison~ USA        3               3
-##  4 06e4b8b67e     Grand Prix Fi~ ICE DANC~ Maia SH~ USA        6               4
-##  5 72e3228deb     Grand Prix Fi~ ICE DANC~ Tessa V~ CAN        2               5
-##  6 08c6ee8862     Grand Prix Fi~ ICE DANC~ Gabriel~ FRA        1               6
-##  7 c080766775     Grand Prix Fi~ ICE DANC~ Anna CA~ ITA        6               1
-##  8 4edddce1b5     Grand Prix Fi~ ICE DANC~ Madison~ USA        4               2
-##  9 57288bfe78     Grand Prix Fi~ ICE DANC~ Madison~ USA        5               3
-## 10 a6d14ef399     Grand Prix Fi~ ICE DANC~ Maia SH~ USA        3               4
-## # ... with 1,716 more rows, and 4 more variables: total_segment_score &lt;dbl&gt;,
-## #   total_element_score &lt;dbl&gt;, total_component_score &lt;dbl&gt;,
-## #   total_deductions &lt;dbl&gt;</code></pre>
-<div id="analysing-ladies-free-skating-results" class="section level3">
+<div id="section-analysing-ladies-free-skating-results" class="section level3">
 <h3>Analysing Ladies Free Skating Results</h3>
-<div id="to-begin-a-subset-ladies_free-was-created-as-shown-below." class="section level4">
+<div id="section-to-begin-a-subset-ladies_free-was-created-as-shown-below." class="section level4">
 <h4>To begin, a subset (ladies_free) was created, as shown below.</h4>
-<pre class="r"><code>ladies_free &lt;- performances %&gt;% 
+</div>
+</div>
+<div id="section-figure-skaters-from-all-over-the-world-compete-against-each-other-for-the-title-of-best-in-the-world." class="section level3">
+<h3>Figure skaters from all over the world compete against each other for the title of best in the world.</h3>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldTerrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"setView":[[-27,170],2,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="section-the-chart-below-shows-the-breakdown-of-the-number-of-competitors-from-each-country.-japan-and-russia-have-the-largest-representation-followed-by-the-united-states-and-subsequently-korea.-surprisingly-canada-only-has-four-competitors-placing-it-5th-in-terms-of-representation." class="section level4">
+<h4>The chart below shows the breakdown of the number of competitors from each country. Japan and Russia have the largest representation, followed by the United States and subsequently Korea. Surprisingly, Canada only has four competitors, placing it 5th in terms of representation.</h4>
+<p><img src="/2021/06/22/p01-final-project/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="section-you-can-interact-with-the-table-below-to-learn-more-about-the-individual-competitors-that-represent-each-country." class="section level4">
+<h4>You can interact with the table below to learn more about the individual competitors that represent each country.</h4>
+<iframe src="https://lyssalu98.shinyapps.io/DataAnalytics2/" height="800" width="100%" frameborder="no">
+</iframe>
+</div>
+<div id="section-canadian-figure-skaters-are-some-of-the-best-in-the-world.-the-following-graph-shows-scores-for-the-various-canadian-figure-skaters-in-competitions." class="section level4">
+<h4>Canadian figure skaters are some of the best in the world. The following graph shows scores for the various Canadian figure skaters in competitions.</h4>
+<pre class="r"><code>canadian_results &lt;- performances %&gt;%
   select(everything()) %&gt;%
-  filter(program == &quot;LADIES FREE SKATING&quot;)
-ladies_free</code></pre>
-<pre><code>## # A tibble: 218 x 11
-##    performance_id competition      program   name   nation  rank starting_number
-##    &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;
-##  1 4d370c29a7     Grand Prix Fina~ LADIES F~ Carol~ ITA        3               1
-##  2 b917f2d80a     Grand Prix Fina~ LADIES F~ Maria~ RUS        2               2
-##  3 d4a4d3d2fb     Grand Prix Fina~ LADIES F~ Wakab~ JPN        6               3
-##  4 3e969440ef     Grand Prix Fina~ LADIES F~ Kaetl~ CAN        5               4
-##  5 5e8023f5f0     Grand Prix Fina~ LADIES F~ Alina~ RUS        1               5
-##  6 0e9192775c     Grand Prix Fina~ LADIES F~ Satok~ JPN        4               6
-##  7 5ebb06bf1a     ISU European Fi~ LADIES F~ Anne ~ NOR       23               1
-##  8 6ac39fa131     ISU European Fi~ LADIES F~ Angel~ LAT       18               2
-##  9 1ee711d597     ISU European Fi~ LADIES F~ Natas~ GBR       16               3
-## 10 686cffa69c     ISU European Fi~ LADIES F~ Natha~ GER       17               4
-## # ... with 208 more rows, and 4 more variables: total_segment_score &lt;dbl&gt;,
-## #   total_element_score &lt;dbl&gt;, total_component_score &lt;dbl&gt;,
-## #   total_deductions &lt;dbl&gt;</code></pre>
+  filter(program == &quot;LADIES FREE SKATING&quot;, nation == &quot;CAN&quot;)
+
+canadian_results %&gt;%
+  tail(10) %&gt;%
+  ggplot( aes(x=competition, y=rank)) +
+    geom_line( color=&quot;grey&quot;) +
+    geom_point(shape=21, color=&quot;black&quot;, fill=&quot;#69b3a2&quot;, size=6) +
+    theme_ipsum() +
+    ggtitle(&quot;Results of Canadian Competitors&quot;) +
+    labs(colour = &quot;name&quot;)</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+## font family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<p><img src="/2021/06/22/p01-final-project/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>
 
@@ -201,6 +194,9 @@ ladies_free</code></pre>
 
 
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
   </body>
